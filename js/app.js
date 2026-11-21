@@ -87,12 +87,15 @@ function renderSites(sites) {
     sites.forEach((s, i) => {
         const rank = i + 1;
         const row = document.createElement("div");
-        row.className = "site-row" + (rank <= 6 ? " top-rank" : "");
+        row.className = "site-row" + (rank <= 6 ? " top-rank" : "") + (rank <= 3 ? " preferred" : "");
         row.dataset.ad = s.ad;
         row.dataset.name = s.name.toLowerCase();
         row.style.animationDelay = Math.min(i * 20, 400) + "ms";
 
+        const preferredTag = rank <= 3 ? '<span class="preferred-tag">⭐ Preferred by @0xSubhan</span>' : '';
+
         row.innerHTML = `
+            ${preferredTag}
             <div class="site-rank">#${rank}</div>
             <div class="site-info" data-ad="${s.ad}">
                 <div class="site-fav"><img alt="" data-src="https://www.google.com/s2/favicons?domain=${s.domain}&sz=24" width="24" height="24"/></div>
